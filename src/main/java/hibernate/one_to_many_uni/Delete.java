@@ -1,28 +1,25 @@
-package hibernate.one_to_one_bi;
+package hibernate.one_to_many_uni;
 
-import hibernate.one_to_one_bi.entity.Detail;
-import hibernate.one_to_one_bi.entity.Employee;
+import hibernate.one_to_many_uni.entity.Department;
+import hibernate.one_to_many_uni.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
-public class Get {
+public class Delete {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Detail.class)
+                .addAnnotatedClass(Department.class)
                 .buildSessionFactory();
 
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            Employee employee = session.get(Employee.class, 16L);
-            List<Employee> employees = session.createQuery("from Employee").getResultList();
-            List<Detail> details = session.createQuery("from Department").getResultList();
+            Department department = session.get(Department.class, 11L);
+            session.delete(department);
             session.getTransaction().commit();
         } finally {
             session.close();

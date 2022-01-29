@@ -19,7 +19,7 @@ public class Delete {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            Section section = session.get(Section.class, 16L);
+            Section section = session.get(Section.class, 17L);
 
             session.delete(section);
 
